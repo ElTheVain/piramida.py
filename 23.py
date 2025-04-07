@@ -110,3 +110,56 @@ Kerja 2 jam, saldo sekarang 8.92
 Kerja 3 jam, saldo sekarang 11.92
 Setelah bekerja, saldo tetap tidak cukup atau X sudah kerja 2 hari berturut-turut. X harus pulang.
 X menginap selama 4 malam sebelum kehabisan uang.
+
+
+def simulasi_penginapan(saldo, biaya_per_malam_awal):
+    malam_ke = 1
+    hari_kerja_berturut = 0
+    harga_malam = biaya_per_malam_awal
+    malam_siklus = 1  # Untuk melacak kapan harus reset ke harga awal
+
+    while True:
+        if malam_siklus == 1:
+            print(f"Mulai siklus baru. Harga per malam: {biaya_per_malam_awal:.2f}")
+
+        print(f"Malam ke-{malam_ke}:")
+        print(f"- Saldo sebelum bayar: {saldo:.2f}")
+        print(f"- Harga penginapan malam ini: {harga_malam:.2f}")
+
+        if saldo >= harga_malam:
+            saldo -= harga_malam
+            print(f"- Bayar penginapan. Sisa saldo: {saldo:.2f}")
+            hari_kerja_berturut = 0
+        else:
+            print("- Saldo tidak cukup! X harus bekerja.")
+            jam_kerja = 0
+
+            while saldo < harga_malam and jam_kerja < 3:
+                saldo += 3
+                jam_kerja += 1
+                print(f"Kerja {jam_kerja} jam, saldo sekarang {saldo:.2f}")
+
+            if saldo >= harga_malam:
+                hari_kerja_berturut += 1
+                if hari_kerja_berturut >= 2:
+                    print("Setelah bekerja, saldo cukup, tapi X sudah kerja 2 hari berturut-turut. X harus pulang.")
+                    break
+                print("Cukup uang setelah bekerja!")
+                saldo -= harga_malam
+                print(f"- Bayar penginapan. Sisa saldo: {saldo:.2f}")
+            else:
+                print("Setelah bekerja, saldo tetap tidak cukup atau X sudah kerja 2 hari berturut-turut. X harus pulang.")
+                break
+
+        # Update malam ke dan siklus
+        malam_ke += 1
+        malam_siklus += 1
+
+        if malam_siklus > 3:
+            malam_siklus = 1
+            harga_malam = biaya_per_malam_awal
+        else:
+            harga_malam *= 0.95
+
+    print(f"X menginap selama {malam_ke - 1} malam sebelum kehabisan uang.")
+
