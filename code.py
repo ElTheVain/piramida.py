@@ -76,3 +76,32 @@ def segitigaPensiunPersegiGajian(n):
                 else:
                     print("*", end=" ")
             print()
+
+
+            #untuk soal piramida wisnu
+def segitigaPensiunPersegiGajian(n):
+    # Cek apakah n adalah bilangan bulat positif
+    if n <= 0:
+        print("Ouput Yang Tersedia")
+        return
+    
+    # Mencetak segitiga terbalik
+    for i in range(n):
+        print(' ' * i, end='')
+        print('* ' * (n - i))
+    
+    # Mencetak persegi bergantian
+    for i in range(n):
+        for j in range(n):
+            if (i + j) % 2 == 0:
+                print('*', end=' ')
+            else:
+                print('#', end=' ')
+        print()  
+
+# Contoh penggunaan
+segitigaPensiunPersegiGajian(6)
+print()  # Untuk memberikan jarak antara output
+segitigaPensiunPersegiGajian(7)
+print()  # Untuk memberikan jarak antara output
+segitigaPensiunPersegiGajian(15)
